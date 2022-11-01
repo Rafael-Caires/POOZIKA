@@ -1,16 +1,21 @@
 #include "Venda.hpp"
 
- Venda::Venda(Data data, Produto prod, int qnt, vector<Lote> LotesComprados, Estoque estoque) {
-   //Validar disponibilidade (qnt < qnt em estoque)
-   if (!ValidaQuantidade(qnt, prod) ) {
-     //Quantidade insuficiente, lançar exceção
-   }
+Venda::Venda(Data data, Produto *prod, int qnt, vector<Lote> LotesComprados, Estoque estoque) {
+this->data = data;
+this->produto = *prod;
+this->quantidade = qnt;
+this->LotesComprados = LotesComprados;
+this->estoque = estoque;
 
-   //Atualizar estoque
-
-   //Imprimir a ordem de produção
-   //if(prod.getEstoque().getEstoqueTotal() < prod.){}
  }
+
+void Venda::ImprimeOrdem() {
+if(estoque.getEstoqueTotal() < produto.getEstoque_min()){
+  Lote produto (this->data,"ordem de produção", this->produto.getEstoque_min(), 20, this->produto);
+  estoque.inserir(produto);
+}
+}
+
 bool Venda::ValidaQuantidade(int qnt) {
   //Validar disponibilidade (qnt < qnt em estoque)
    if (qnt > this->estoque.getEstoqueTotal() ) {
@@ -39,13 +44,8 @@ void Venda::AtualizaEstoque(){
         estoque.getLotesAtuais().front().setQntAtual(quantidadeFinal);
       }
     }
-      if(this->produto.getEstoque().getEstoqueTotal() - this->quantidade < this->produto.QntMin){
+      if(this->estoque.getEstoqueTotal() - this->quantidade < this->produto.getEstoque_min()){
           this->ImprimeOrdem();
       }
   }
-}
-
-void Venda::ImprimeOrdem(){
-  Lote ordem {this->data,"ordem", this->produto, this->produto.QntMin, this->produto.lote_min};   //Rever string!!! 
-  
 }

@@ -18,7 +18,7 @@ class Lote{
   Produto produto;
 
   public:
-
+  Lote();
   Lote(Data Data, string identificador, int QntMin, int QntAtual, Produto produto);
 
   Data getData();

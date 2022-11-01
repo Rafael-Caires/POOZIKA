@@ -1,6 +1,10 @@
 #include "Lote.hpp"
 #include <iostream>
 
+Lote::Lote(){
+  //Criar construtor
+}
+
 Lote::Lote (Data data_, string identificador_, int QntMin_, int QntAtual_, Produto produto_) {
 
   //Conferindo se o lote produz a quantidade suficiente
